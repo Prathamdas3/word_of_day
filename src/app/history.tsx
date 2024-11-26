@@ -1,67 +1,37 @@
-import { SafeAreaView, View } from "react-native";
 import { Button, Text } from 'react-native-paper'
 import { FlashList } from '@shopify/flash-list'
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
-import { ProcessedWord } from "../hooks/filterdata.hook";
 import HistoryCard from "../components/HistoryCard";
+import { View, ScrollView, RefreshControl } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import useHistoryPage from '../hooks/history.hook';
 
-const removeData = async () => {
-  try {
-    await AsyncStorage.removeItem('WordsData')
-    getData()
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-const getData = async () => {
-  try {
-    const data = await AsyncStorage.getItem('WordsData')
-    if (data == null) {
-      return null
-    }
-    return data
-  } catch (error) {
-    console.log(error)
-    return null
-  }
-}
 
 export default function HistoryScreen() {
-  const [data, setData] = useState<ProcessedWord[]>([])
-  const router = useRouter()
-
-  useEffect(() => {
-    (async () => {
-      const data = await getData()
-      console.log(data)
-      if (data === null) {
-        setData([])
-      } else {
-        setData(JSON.parse(data))
-      }
-    })()
-  }, [])
-  console.log(data)
-
+const {refreshing,onRefresh,data,handleClearHistory,router}=useHistoryPage()
   return (
-    <SafeAreaView style={{ flex: 1, justifyContent: "space-between", padding: 20 }}>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{ flex: 1, justifyContent: "space-between", padding: 20 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          {data.length > 0 ? <FlashList
+            data={data}
+            renderItem={({ item }) => <HistoryCard data={item} />}
+            estimatedItemSize={200}
+            keyExtractor={(Item) => Item.word}
+            contentContainerStyle={{ padding: 10 }}
+          />
+            : <View style={{ display: "flex", justifyContent: "center", alignItems: "center",height:'90%' }}><Text variant="titleMedium">Empty History</Text></View>}
 
-      {data.length > 0 ? <FlashList
-        data={data}
-        renderItem={({ item }) => <HistoryCard data={item} />}
-        estimatedItemSize={200}
-        keyExtractor={(Item) => Item.word}
-        contentContainerStyle={{ padding: 10 }}
-      />
-        : <View style={{ display: "flex", justifyContent: "center", alignItems:"center" }}><Text variant="titleMedium">Empty History</Text></View>}
-
-      <View style={{ display: "flex", gap: 5 }}>
-        <Button mode="contained" icon="delete" buttonColor="#dc2626" onPress={removeData}>Clear History</Button>
-        <Button mode="contained" icon="home" onPress={() => router.back()}>Back Home</Button>
-      </View>
-    </SafeAreaView>
+          <View style={{ display: "flex", gap: 5 }}>
+            <Button mode="contained" icon="delete" buttonColor="#dc2626" onPress={handleClearHistory}>Clear History</Button>
+            <Button mode="contained" icon="home" onPress={() => router.back()}>Back Home</Button>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
