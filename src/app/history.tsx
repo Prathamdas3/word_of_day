@@ -7,10 +7,11 @@ import useHistoryPage from '../hooks/history.hook';
 
 
 export default function HistoryScreen() {
-const {refreshing,onRefresh,data,handleClearHistory,router}=useHistoryPage()
+  const { refreshing, onRefresh, data, handleClearHistory, router, color } = useHistoryPage()
+
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={[{ flex: 1 }, { backgroundColor: `${color === 'light' ? '#e5e7eb' : '#1f2937'}` }]}>
         <ScrollView
           contentContainerStyle={{ flex: 1, justifyContent: "space-between", padding: 20 }}
           refreshControl={
@@ -24,10 +25,10 @@ const {refreshing,onRefresh,data,handleClearHistory,router}=useHistoryPage()
             keyExtractor={(Item) => Item.word}
             contentContainerStyle={{ padding: 10 }}
           />
-            : <View style={{ display: "flex", justifyContent: "center", alignItems: "center",height:'90%' }}><Text variant="titleMedium">Empty History</Text></View>}
+            : <View style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '90%' }}><Text variant="titleMedium">Empty History</Text></View>}
 
           <View style={{ display: "flex", gap: 5 }}>
-            <Button mode="contained" icon="delete" buttonColor="#dc2626" onPress={handleClearHistory}>Clear History</Button>
+            <Button mode="contained" icon="delete" buttonColor="#dc2626" onPress={handleClearHistory} >Clear History</Button>
             <Button mode="contained" icon="home" onPress={() => router.back()}>Back Home</Button>
           </View>
         </ScrollView>

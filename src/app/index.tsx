@@ -5,11 +5,11 @@ import { useInitialPage } from "../hooks/initial.hook";
 import WordOfTheDayCard from "../components/WordOfTheDayCard";
 
 export default function Index() {
-  const { data, error, onRefresh, handleNewWordGeneration, refreshing, isConnected, router } = useInitialPage()
+  const { data, error, onRefresh, handleNewWordGeneration, refreshing, isConnected, router,color} = useInitialPage()
 
 
-  if (!data) {
-    return <SafeAreaView style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+  if (data==null) {
+    return <SafeAreaView style={[{ flex: 1, justifyContent: "center", alignItems: "center"},{ backgroundColor: `${color === 'light' ? '#e5e7eb' : '#1f2937'}` } ]}>
       <ActivityIndicator animating={true} color={MD2Colors.red800} size="large" />
     </SafeAreaView>
   }
@@ -24,7 +24,7 @@ export default function Index() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1 }}
+      <SafeAreaView style={[{ flex: 1 },{backgroundColor:`${color==='light'?'#e5e7eb':'#1f2937'}`}]}
       >
         <ScrollView
           contentContainerStyle={{ flex: 1, padding: 20, justifyContent: "space-between" }}

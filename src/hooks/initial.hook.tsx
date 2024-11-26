@@ -4,11 +4,14 @@ import { useNetworkState } from "expo-network";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ProcessedWord } from "./filterdata.hook";
 import { useRouter } from "expo-router";
+import {useColorScheme} from 'react-native'
+
 
 export  function useInitialPage(){
     const [refreshing, setRefreshing] = useState<boolean>(false);
     const { result: data, error, mutate } = useGetData()
     const router=useRouter()
+    const color=useColorScheme()
     
     const { isConnected } = useNetworkState()
     const handleInitialLoad = async () => {
@@ -31,9 +34,11 @@ export  function useInitialPage(){
         }
       }
     }
+
     useEffect(() => {
-        handleInitialLoad()
-      }, [])
+      handleInitialLoad()
+    }, [])
+
     const handleNewWordGeneration = async () => {
         mutate()
         const value = await AsyncStorage.getItem('WordsData');
@@ -59,6 +64,6 @@ export  function useInitialPage(){
       }
 
     return {
-        refreshing,setRefreshing,handleInitialLoad,data,error,mutate,onRefresh,handleNewWordGeneration,isConnected,router
+        refreshing,setRefreshing,handleInitialLoad,data,error,mutate,onRefresh,handleNewWordGeneration,isConnected,router,color
     }
 }

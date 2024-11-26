@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ProcessedWord } from "./filterdata.hook";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useColorScheme } from "react-native";
 
 const removeData = async () => {
     try {
@@ -29,6 +30,7 @@ export default function useHistoryPage(){
     const [data, setData] = useState<ProcessedWord[]>([])
     const [refreshing, setRefreshing] = useState<boolean>(false);
     const router = useRouter()
+    const color=useColorScheme()
     const onInitialLoad = async () => {
       const data = await getData()
       if (data === null) {
@@ -52,5 +54,5 @@ export default function useHistoryPage(){
       onInitialLoad()
       setRefreshing(false)
     }
-    return {data,refreshing,onRefresh,handleClearHistory,router}
+    return {data,refreshing,onRefresh,handleClearHistory,router,color}
 }
