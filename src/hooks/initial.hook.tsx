@@ -15,7 +15,7 @@ export function useInitialPage() {
   const { isConnected } = useNetworkState()
   const color = useColorScheme()
   const router = useRouter()
-
+  
   const handleInitialLoad = async () => {
     const value = await AsyncStorage.getItem('WordsData');
     if (value !== null) {
@@ -41,19 +41,14 @@ export function useInitialPage() {
 
 
   const onRefresh = () => {
-    (async () => {
-      setRefreshing(true)
-      await handleNewWordGeneration()
-      setRefreshing(false)
-    })()
+    setRefreshing(true)
+    handleNewWordGeneration()
+    setRefreshing(false)
   }
 
   useEffect(() => {
-    (async () => {
-      setData(initialValue)
-      await handleInitialLoad()
-    })()
-
+    setData(initialValue)
+    handleInitialLoad()
   }, [initialValue])
 
   return {
