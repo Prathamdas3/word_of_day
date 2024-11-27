@@ -81,6 +81,7 @@ A simple React Native app built using **Expo** that displays a "Word of the Day"
 ## 📸 Sample Screenshots
 
 ### Light Theme
+<div style="display:grid,grid-cols:3">
 <img src="screenshots/img_light_1.jpg" width="324"/>
 <img src="screenshots/img_light_2.jpg" width="324"/>
 <img src="screenshots/img_light_6.jpg" width="324"/>
@@ -89,9 +90,11 @@ A simple React Native app built using **Expo** that displays a "Word of the Day"
 <img src="screenshots/img_light_9.jpg" width="324"/>
 <img src="screenshots/img_light_10.jpg" width="324"/>
 <img src="screenshots/img_light_11.jpg" width="324"/>
+</div>
 
 ### Dark Theme
 
+<div style="display:grid,grid-cols:3">
 <img src="screenshots/img_dark_1.jpg" width="324"/>
 <img src="screenshots/img_dark_2.jpg" width="324"/>
 <img src="screenshots/img_dark_4.jpg" width="324"/>
@@ -100,5 +103,6 @@ A simple React Native app built using **Expo** that displays a "Word of the Day"
 <img src="screenshots/img_dark_6.jpg" width="324"/>
 <img src="screenshots/img_dark_7.jpg" width="324"/>
 <img src="screenshots/img_dark_8.jpg" width="324"/>
+</div>
 
 ### Thank you for exploring the Word of the Day App! 🚀
