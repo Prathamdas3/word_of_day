@@ -44,17 +44,17 @@ export function useInitialPage() {
 
   const handleNewWordGeneration = async () => {
     mutate()
-    if (newValue !== null && data!==newValue) setData(newValue)
+    if (newValue !== null && data !== newValue) setData(newValue)
     const value = await AsyncStorage.getItem('WordsData');
     if (value !== null) {
       const preValue: ProcessedWord[] = JSON.parse(value);
 
-      const currentValue = preValue.some((v) => v.word === newValue?.word)
-        ? preValue.map((v) => (v.word === newValue?.word ? { ...v, ...newValue } : v))
-        : [...preValue, newValue];
+      const currentValue = preValue.some((v) => v.word === data?.word)
+        ? preValue.map((v) => (v.word === newValue?.word ? { ...v, ...data } : v))
+        : [...preValue, data];
 
 
-      if (newValue !== null) {
+      if (data !== null&& data!==newValue) {
         await AsyncStorage.setItem('WordsData', JSON.stringify(currentValue));
       }
     }
