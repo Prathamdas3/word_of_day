@@ -82,6 +82,7 @@ A simple React Native app built using **Expo** that displays a "Word of the Day"
 
 ### Light Theme
 <div style="display:grid,grid-cols:3">
+<img src="screenshots/image_light_loading.jpg" width="216"/>
 <img src="screenshots/img_light_1.jpg" width="216"/>
 <img src="screenshots/img_light_2.jpg" width="216"/>
 <img src="screenshots/img_light_6.jpg" width="216"/>
@@ -95,6 +96,7 @@ A simple React Native app built using **Expo** that displays a "Word of the Day"
 ### Dark Theme
 
 <div style="display:grid,grid-cols:3">
+<img src="screenshots/img_dark_loading.jpg" width="216"/>
 <img src="screenshots/img_dark_1.jpg" width="216"/>
 <img src="screenshots/img_dark_2.jpg" width="216"/>
 <img src="screenshots/img_dark_4.jpg" width="216"/>

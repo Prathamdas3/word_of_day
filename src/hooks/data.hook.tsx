@@ -19,7 +19,9 @@ export function useGetData() {
     },
   })
 
+  
   const result = useProcessedWord(value.data && value?.data[0])
 
+  
   return { ...value, result };
 }

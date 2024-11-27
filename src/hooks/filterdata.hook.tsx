@@ -8,14 +8,13 @@ export type ProcessedWord = {
   example: string;
 };
 
-export const useProcessedWord = (data: any | null)=> {
+export const useProcessedWord = (data: any |null)=> {
   const [processedWord, setProcessedWord] = useState<ProcessedWord | null>(null);
 
 
   useEffect(() => {
     if (!data) return ;
 
-    
     const getCurrentDateTime = () => {
       const now = new Date();
       return {
