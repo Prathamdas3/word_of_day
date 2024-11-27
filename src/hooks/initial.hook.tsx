@@ -4,66 +4,68 @@ import { useNetworkState } from "expo-network";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ProcessedWord } from "./filterdata.hook";
 import { useRouter } from "expo-router";
-import {useColorScheme} from 'react-native'
+import { useColorScheme } from 'react-native'
 
 
-export  function useInitialPage(){
-    const [refreshing, setRefreshing] = useState<boolean>(false);
-    const { result: data, error, mutate } = useGetData()
-    const router=useRouter()
-    const color=useColorScheme()
-    
-    const { isConnected } = useNetworkState()
-    const handleInitialLoad = async () => {
-      if (isConnected) {
-        mutate()
-        const value = await AsyncStorage.getItem('WordsData');
-        if (value !== null) {
-          const preValue: ProcessedWord[] = JSON.parse(value);
-  
-          const currentValue = preValue.some((v) => v.word === data?.word)
-            ? preValue.map((v) => (v.word === data?.word ? { ...v, ...data } : v))
-            : [...preValue, data];
-  
-  
-          if (data !== null) {
-            await AsyncStorage.setItem('WordsData', JSON.stringify(currentValue));
-          }
-        } else if (data !== null) {
-          await AsyncStorage.setItem('WordsData', JSON.stringify([data]));
+export function useInitialPage() {
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+  const { result: data, error, mutate } = useGetData()
+  const router = useRouter()
+  const { isConnected } = useNetworkState()
+  const color = useColorScheme()
+
+
+  const handleInitialLoad = async () => {
+    if (isConnected) {
+      mutate()
+      const value = await AsyncStorage.getItem('WordsData');
+      if (value !== null) {
+        const preValue: ProcessedWord[] = JSON.parse(value);
+
+        const currentValue = preValue.some((v) => v.word === data?.word)
+          ? preValue.map((v) => (v.word === data?.word ? { ...v, ...data } : v))
+          : [...preValue, data];
+
+
+        if (data !== null) {
+          await AsyncStorage.setItem('WordsData', JSON.stringify(currentValue));
         }
+      } else if (data !== null) {
+        await AsyncStorage.setItem('WordsData', JSON.stringify([data]));
       }
     }
+  }
 
-    useEffect(() => {
-      handleInitialLoad()
-    }, [])
 
-    const handleNewWordGeneration = async () => {
-        mutate()
-        const value = await AsyncStorage.getItem('WordsData');
-        if (value !== null) {
-          const preValue: ProcessedWord[] = JSON.parse(value);
-    
-          const currentValue = preValue.some((v) => v.word === data?.word)
-            ? preValue.map((v) => (v.word === data?.word ? { ...v, ...data } : v))
-            : [...preValue, data];
-    
-    
-          if (data !== null) {
-            await AsyncStorage.setItem('WordsData', JSON.stringify(currentValue));
-          }
-        }
+
+  const handleNewWordGeneration = async () => {
+    mutate()
+    const value = await AsyncStorage.getItem('WordsData');
+    if (value !== null) {
+      const preValue: ProcessedWord[] = JSON.parse(value);
+
+      const currentValue = preValue.some((v) => v.word === data?.word)
+        ? preValue.map((v) => (v.word === data?.word ? { ...v, ...data } : v))
+        : [...preValue, data];
+
+
+      if (data !== null) {
+        await AsyncStorage.setItem('WordsData', JSON.stringify(currentValue));
       }
-    
-
-    const onRefresh = () => {
-        setRefreshing(true)
-        handleInitialLoad()
-        setRefreshing(false)
-      }
-
-    return {
-        refreshing,setRefreshing,handleInitialLoad,data,error,mutate,onRefresh,handleNewWordGeneration,isConnected,router,color
     }
+  }
+
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    handleInitialLoad()
+    setRefreshing(false)
+  }
+
+  useEffect(() => {
+    handleInitialLoad()
+  }, [])
+  return {
+    refreshing, setRefreshing, handleInitialLoad, data, error, mutate, onRefresh, handleNewWordGeneration, isConnected, router, color
+  }
 }

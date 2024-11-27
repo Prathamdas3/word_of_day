@@ -1,50 +1,104 @@
-# Welcome to your Expo app 👋
+# Word of the Day App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A simple React Native app built using **Expo** that displays a "Word of the Day" along with its definition and example sentence. The app also allows users to browse through previously viewed words and persists data between sessions using **AsyncStorage**. Routing is implemented using **Expo Router**.
 
-## Get started
+---
 
-1. Install dependencies
+## 📱 Features
 
+- **Home Screen:**
+  - Displays a randomly fetched "Word of the Day" with its definition and example sentence.
+  - A "New Word" button to fetch and display a new word.
+  - A button to navigate to the "History" screen.
+
+- **History Screen:**
+  - Displays a list of previously viewed words with their definitions, example sentences, and the date they were first displayed.
+  - A "Clear History" button to remove all past words.
+
+- **Data Persistence:**
+  - Uses `AsyncStorage` to save and retrieve viewed words between app sessions.
+
+- **Navigation:**
+  - Utilizes **Expo Router** for seamless navigation between screens.
+
+
+
+## 🚀 Installation and Setup
+
+1. **Clone the Repository:**
    ```bash
-   npm install
+   git clone https://github.com/Prathamdas3/word_of_day.git
    ```
 
-2. Start the app
-
+2. **Change into folder:**
    ```bash
-    npx expo start
+   cd word_of_day
    ```
 
-In the output, you'll find options to open the app in a
+3. **Install Dependencies:**
+   ```bash
+   npm install 
+   or
+   pnpm install
+   or 
+   bun install
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+4. **Create a clean prebuild:**
+   ```bash
+   npx expo prebuild --clean
+   or 
+   bunx expo prebuild --clean
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+5. **Start on Emulator:**
+   ```bash
+   npm run android
+   or 
+   bun run android
+   or 
+   pnpm run android
+   ```
 
-## Get a fresh project
+## 🧑‍💻 Usage Instructions
+1. Open the app on your device or emulator.
+2. On the Home Screen:
+    - View the current "Word of the Day."
+    - Press the "New Word" button to fetch a new word.
+    - Navigate to the History Screen to view previously viewed words.
+3. On the History Screen:
+    - Browse the list of past words with their definitions and example sentences.
+    - Use the "Clear History" button to remove all stored words.
+  
+## 🛠️ Technologies Used
+1. React Native (via Expo)
+2. Expo Router for navigation
+3. AsyncStorage for data persistence
+4. TypeScript 
+5. React Hooks: useState, useEffect, etc.
+6. Axios, @tanstack/react-query
 
-When you're ready, run:
+## 📸 Sample Screenshots
 
-```bash
-npm run reset-project
-```
+### Light Theme
+<img src="screenshots/img_light_1.jpg" width="324"/>
+<img src="screenshots/img_light_2.jpg" width="324"/>
+<img src="screenshots/img_light_6.jpg" width="324"/>
+<img src="screenshots/img_light_5.jpg" width="324"/>
+<img src="screenshots/img_light_8.jpg" width="324"/>
+<img src="screenshots/img_light_9.jpg" width="324"/>
+<img src="screenshots/img_light_10.jpg" width="324"/>
+<img src="screenshots/img_light_11.jpg" width="324"/>
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Dark Theme
 
-## Learn more
+<img src="screenshots/img_dark_1.jpg" width="324"/>
+<img src="screenshots/img_dark_2.jpg" width="324"/>
+<img src="screenshots/img_dark_4.jpg" width="324"/>
+<img src="screenshots/img_dark_3.jpg" width="324"/>
+<img src="screenshots/img_dark_5.jpg" width="324"/>
+<img src="screenshots/img_dark_6.jpg" width="324"/>
+<img src="screenshots/img_dark_7.jpg" width="324"/>
+<img src="screenshots/img_dark_8.jpg" width="324"/>
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Thank you for exploring the Word of the Day App! 🚀
