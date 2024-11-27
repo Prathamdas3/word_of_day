@@ -2,6 +2,8 @@
 
 A simple React Native app built using **Expo** that displays a "Word of the Day" along with its definition and example sentence. The app also allows users to browse through previously viewed words and persists data between sessions using **AsyncStorage**. Routing is implemented using **Expo Router**.
 
+### [Try WordDay](https://expo.dev/artifacts/eas/vQF411RCDXAqVVQW8ddG1n.apk)
+
 ---
 
 ## 📱 Features
