@@ -8,7 +8,7 @@ export default function Index() {
   const { data, error, onRefresh, handleNewWordGeneration, refreshing, isConnected, router, color, isPending } = useInitialPage()
 
 
-  if (isPending) {
+  if (isPending || data==null) {
     return <SafeAreaView style={[{ flex: 1, justifyContent: "center", alignItems: "center" }, { backgroundColor: `${color === 'light' ? '#e5e7eb' : '#1f2937'}` }]}>
       <ActivityIndicator animating={true} color={MD2Colors.red800} size="large" />
     </SafeAreaView>

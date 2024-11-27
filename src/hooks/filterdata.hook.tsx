@@ -8,7 +8,7 @@ export type ProcessedWord = {
   example: string;
 };
 
-export const useProcessedWord = (data: any |null)=> {
+export const useProcessedWord = (data: any)=> {
   const [processedWord, setProcessedWord] = useState<ProcessedWord | null>(null);
 
 

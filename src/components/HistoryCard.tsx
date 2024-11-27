@@ -3,6 +3,7 @@ import { ProcessedWord } from "../hooks/filterdata.hook"
 
 
 export default function HistoryCard({data}:{data: ProcessedWord}) {
+ 
     return <Card style={{marginTop:10}}>
         <Card.Title
             title={data.word}
