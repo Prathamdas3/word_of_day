@@ -36,7 +36,7 @@ export function useInitialPage() {
     }
   }
 
-  console.log(data)
+
   useEffect(() => {
     setData(initialValue)
     handleInitialLoad()
@@ -63,7 +63,7 @@ export function useInitialPage() {
 
   const onRefresh = () => {
     setRefreshing(true)
-    handleInitialLoad()
+    handleNewWordGeneration()
     setRefreshing(false)
   }
 
