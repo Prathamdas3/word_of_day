@@ -38,14 +38,13 @@ export function useInitialPage() {
 
   console.log(data)
   useEffect(() => {
-
     setData(initialValue)
     handleInitialLoad()
-
   }, [initialValue])
 
   const handleNewWordGeneration = async () => {
     mutate()
+    if (newValue !== null && data!==newValue) setData(newValue)
     const value = await AsyncStorage.getItem('WordsData');
     if (value !== null) {
       const preValue: ProcessedWord[] = JSON.parse(value);
