@@ -54,7 +54,7 @@ export function useInitialPage() {
         : [...preValue, data];
 
 
-      if (data !== null&& data!==newValue) {
+      if (data !== null) {
         await AsyncStorage.setItem('WordsData', JSON.stringify(currentValue));
       }
     }
