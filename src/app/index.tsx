@@ -7,8 +7,7 @@ import WordOfTheDayCard from "../components/WordOfTheDayCard";
 export default function Index() {
   const { data, error, onRefresh, handleNewWordGeneration, refreshing, isConnected, router, color, isPending } = useInitialPage()
 
-
-  if (isPending || data==null) {
+  if (isPending || data == null) {
     return <SafeAreaView style={[{ flex: 1, justifyContent: "center", alignItems: "center" }, { backgroundColor: `${color === 'light' ? '#e5e7eb' : '#1f2937'}` }]}>
       <ActivityIndicator animating={true} color={MD2Colors.red800} size="large" />
     </SafeAreaView>
@@ -33,7 +32,7 @@ export default function Index() {
           }
         >{
             !data ? <View>
-              <View style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+              <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Text variant="headlineLarge" style={{ fontWeight: "bold" }}>Error while Loading </Text>
                 <Text variant="headlineLarge" style={{ fontWeight: "bold" }}>Please Reload the app </Text>
               </View>

@@ -8,10 +8,11 @@ import useHistoryPage from '../hooks/history.hook';
 
 export default function HistoryScreen() {
   const { refreshing, onRefresh, data, handleClearHistory, router, color } = useHistoryPage()
+ 
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={[{ flex: 1 }, { backgroundColor: `${color === 'light' ? '#e5e7eb' : '#1f2937'}` }]}>
+      <SafeAreaView style={[{ flex: 1,padding:5 }, { backgroundColor: `${color === 'light' ? '#e5e7eb' : '#1f2937'}` }]}>
         <ScrollView
           contentContainerStyle={{ flex: 1, justifyContent: "space-between", padding: 20 }}
           refreshControl={

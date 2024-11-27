@@ -17,55 +17,44 @@ export function useInitialPage() {
   const router = useRouter()
 
   const handleInitialLoad = async () => {
-    if (isConnected) {
-      const value = await AsyncStorage.getItem('WordsData');
-      if (value !== null) {
-        const preValue: ProcessedWord[] = JSON.parse(value);
-
-        const currentValue = preValue.some((v) => v.word === data?.word)
-          ? preValue.map((v) => (v.word === data?.word ? { ...v, ...newValue } : v))
-          : [...preValue, data];
-
-
-        if (data !== null) {
-          await AsyncStorage.setItem('WordsData', JSON.stringify(currentValue));
-        }
-      } else if (data !== null) {
-        await AsyncStorage.setItem('WordsData', JSON.stringify([data]));
-      }
-    }
-  }
-
-
-  useEffect(() => {
-    setData(initialValue)
-    handleInitialLoad()
-  }, [initialValue])
-
-  const handleNewWordGeneration = async () => {
-    mutate()
-    if (newValue !== null && data !== newValue) setData(newValue)
     const value = await AsyncStorage.getItem('WordsData');
     if (value !== null) {
       const preValue: ProcessedWord[] = JSON.parse(value);
-
       const currentValue = preValue.some((v) => v.word === data?.word)
-        ? preValue.map((v) => (v.word === newValue?.word ? { ...v, ...data } : v))
+        ? preValue.map((v) => (v.word === data?.word ? { ...v, ...data } : v))
         : [...preValue, data];
-
 
       if (data !== null) {
         await AsyncStorage.setItem('WordsData', JSON.stringify(currentValue));
       }
+    } else if (data !== null) {
+      await AsyncStorage.setItem('WordsData', JSON.stringify([data]));
     }
   }
 
 
-  const onRefresh = () => {
-    setRefreshing(true)
-    handleNewWordGeneration()
-    setRefreshing(false)
+  const handleNewWordGeneration = async () => {
+    mutate()
+    if (newValue !== null) setData(newValue)
+    await handleInitialLoad()
   }
+
+
+  const onRefresh = () => {
+    (async () => {
+      setRefreshing(true)
+      await handleNewWordGeneration()
+      setRefreshing(false)
+    })()
+  }
+
+  useEffect(() => {
+    (async () => {
+      setData(initialValue)
+      await handleInitialLoad()
+    })()
+
+  }, [initialValue])
 
   return {
     refreshing, setRefreshing, handleInitialLoad, data, error, mutate, onRefresh, handleNewWordGeneration, isConnected, router, color, isPending
